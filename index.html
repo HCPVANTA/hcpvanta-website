@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HCPVanta | Meetings with hospital buyers for UK healthcare suppliers</title>
+<meta name="description" content="HCPVanta books qualified sales meetings for UK healthcare suppliers with NHS trusts, private hospitals and care groups. You pay only for meetings that happen.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232F6F6A'/><rect x='7' y='9' width='18' height='4' rx='1' fill='%23E9B949'/><rect x='7' y='16' width='12' height='3' rx='1' fill='white'/><rect x='7' y='22' width='15' height='3' rx='1' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #F7F9F8;
+    --surface: #FFFFFF;
+    --ink: #16252B;
+    --muted: #55666B;
+    --line: #D6DFDC;
+    --teal: #2F6F6A;
+    --teal-ink: #FFFFFF;
+    --slot: #E9B949;
+    --slot-ink: #2A2207;
+    --soft: #E8F0EE;
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0F1A1D;
+      --surface: #16242A;
+      --ink: #E6EEEC;
+      --muted: #A3B4B5;
+      --line: #2A3B40;
+      --teal: #6FB8AF;
+      --teal-ink: #0F1A1D;
+      --slot: #E9B949;
+      --slot-ink: #2A2207;
+      --soft: #1B2D32;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--teal); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--slot);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+
+  /* Header */
+  header.site {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .brand span { color: var(--teal); }
+  .btn {
+    display: inline-block;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0.8rem 1.35rem;
+    border-radius: 999px;
+    background: var(--teal);
+    color: var(--teal-ink);
+    border: 2px solid var(--teal);
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: transparent; color: var(--teal); }
+  header.site .btn { padding: 0.55rem 1.1rem; font-size: 0.95rem; }
+
+  /* Hero */
+  .hero { padding: clamp(3rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5rem); }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
+  h1 { font-size: clamp(2.3rem, 5.2vw, 3.9rem); font-weight: 800; max-width: 14ch; }
+  .lede { font-size: 1.2rem; color: var(--muted); max-width: 46ch; margin: 1.4rem 0 2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+  /* The diary: the page's signature element */
+  .diary {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.25rem;
+  }
+  .diary-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0 0.25rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0.9rem;
+  }
+  .diary-head strong { font-family: var(--display); font-size: 1.1rem; }
+  .diary-head span { color: var(--muted); font-size: 0.9rem; }
+  .days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+  .day h3 {
+    font-family: var(--body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .col {
+    background: var(--soft);
+    border-radius: 10px;
+    min-height: 15rem;
+    padding: 0.4rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .slot {
+    background: var(--slot);
+    color: var(--slot-ink);
+    border-radius: 8px;
+    padding: 0.5rem 0.55rem;
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+  .slot b { display: block; font-size: 0.8rem; }
+  .slot.s1 { margin-top: 1.2rem; }
+  .slot.s3 { margin-top: 3.5rem; }
+  .slot.s5 { margin-top: 6rem; }
+  .diary figcaption { color: var(--muted); font-size: 0.88rem; margin-top: 0.9rem; padding: 0 0.25rem; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .slot { opacity: 0; transform: translateY(6px); animation: book 0.5s ease-out forwards; }
+    .slot.s1 { animation-delay: 0.35s; }
+    .slot.s2 { animation-delay: 0.65s; }
+    .slot.s3 { animation-delay: 0.95s; }
+    .slot.s4 { animation-delay: 1.25s; }
+    .slot.s5 { animation-delay: 1.55s; }
+    .slot.s6 { animation-delay: 1.85s; }
+    @keyframes book { to { opacity: 1; transform: none; } }
+  }
+
+  /* Sections */
+  section.block { padding: clamp(3rem, 6vw, 5rem) 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 700; max-width: 22ch; }
+  .intro { color: var(--muted); max-width: 60ch; margin: 1rem 0 0; }
+  .split { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+
+  .fit { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  .fit li { padding-left: 1.6rem; position: relative; max-width: 58ch; }
+  .fit li::before {
+    content: ""; position: absolute; left: 0; top: 0.55em;
+    width: 0.7rem; height: 0.7rem; border-radius: 3px; background: var(--slot);
+  }
+
+  .buyers { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; padding: 0; list-style: none; }
+  .buyers li {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 2.5rem 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  ol.steps li { counter-increment: step; border-top: 3px solid var(--teal); padding-top: 1rem; }
+  ol.steps li::before {
+    content: counter(step);
+    font-family: var(--display); font-weight: 800; font-size: 2.2rem; color: var(--teal); line-height: 1;
+    display: block; margin-bottom: 0.6rem;
+  }
+  ol.steps h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  ol.steps p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+
+  .pay {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .pay p { margin: 0 0 1rem; max-width: 56ch; }
+  .pay p:last-child { margin-bottom: 0; }
+  .pay .big { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.2; }
+
+  .contact { text-align: left; }
+  .contact .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+  .contact p { color: var(--muted); margin: 0.75rem 0 0; max-width: 50ch; }
+
+  /* Privacy */
+  details.privacy { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  details.privacy summary {
+    cursor: pointer; padding: 1.1rem 1.4rem; font-family: var(--display); font-weight: 700; font-size: 1.2rem;
+  }
+  .privacy-body { padding: 0 1.4rem 1.4rem; max-width: 72ch; }
+  .privacy-body h3 { font-size: 1.05rem; margin: 1.4rem 0 0.4rem; }
+  .privacy-body p, .privacy-body li { color: var(--muted); font-size: 0.97rem; }
+  .privacy-body ul { padding-left: 1.2rem; }
+
+  footer.site { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
+  footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+  @media (max-width: 900px) {
+    .hero .wrap, .split { grid-template-columns: 1fr; }
+    ol.steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    ol.steps { grid-template-columns: 1fr; }
+    .days { gap: 0.3rem; }
+    .col { min-height: 12rem; padding: 0.25rem; }
+    .slot { font-size: 0.68rem; padding: 0.35rem; }
+    .slot b { font-size: 0.7rem; }
+    header.site .btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="HCPVanta home">HCP<span>Vanta</span></a>
+    <a class="btn" href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Book a 15-minute chat</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Meetings with hospital buyers, booked into your diary.</h1>
+        <p class="lede">HCPVanta finds and contacts the people who buy for NHS trusts, private hospitals and care groups, and books qualified sales meetings for UK healthcare suppliers. You pay only for meetings that happen.</p>
+        <div class="actions">
+          <a class="btn" href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Book a 15-minute chat</a>
+          <a class="btn ghost" href="#how">See how it works</a>
+        </div>
+      </div>
+
+      <figure class="diary" aria-label="Example of a week of booked meetings">
+        <div class="diary-head">
+          <strong>Your diary</strong>
+          <span>Example week</span>
+        </div>
+        <div class="days">
+          <div class="day">
+            <h3>Mon</h3>
+            <div class="col">
+              <div class="slot s1"><b>10:00</b>Head of Estates, acute trust</div>
+            </div>
+          </div>
+          <div class="day">
+            <h3>Tue</h3>
+            <div class="col">
+              <div class="slot s2"><b>09:30</b>Infection Prevention Lead, private hospital</div>
+            </div>
+          </div>
+          <div class="day">
+            <h3>Wed</h3>
+            <div class="col">
+              <div class="slot s3"><b>13:00</b>Procurement Manager, NHS trust</div>
+            </div>
+          </div>
+          <div class="day">
+            <h3>Thu</h3>
+            <div class="col">
+              <div class="slot s4"><b>11:00</b>Facilities Manager, care group</div>
+              <div class="slot s6"><b>14:30</b>Clinical Nurse Lead, NHS trust</div>
+            </div>
+          </div>
+          <div class="day">
+            <h3>Fri</h3>
+            <div class="col">
+              <div class="slot s5"><b>15:00</b>Director of Estates, community trust</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>An illustration. Your target buyers are agreed with you before any outreach begins.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="block" id="who">
+    <div class="wrap split">
+      <div>
+        <h2>Built for small suppliers with a strong product and no time to prospect.</h2>
+      </div>
+      <div>
+        <ul class="fit">
+          <li>You're a UK supplier selling into hospitals or care settings, usually with a team of 5 to 50.</li>
+          <li>The founder or managing director still does most of the selling, alongside running the business.</li>
+          <li>You know hospitals need what you offer, but reaching the right buyer takes time you don't have.</li>
+        </ul>
+        <ul class="buyers" aria-label="Examples of buyers we contact">
+          <li>Procurement</li>
+          <li>Estates and facilities</li>
+          <li>Infection prevention</li>
+          <li>Clinical leads</li>
+          <li>Workforce and HR</li>
+          <li>Digital and IT</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="intro">Every campaign follows the same four steps, and nothing goes out without your approval.</p>
+      <ol class="steps">
+        <li>
+          <h3>Agree your ideal buyer</h3>
+          <p>A short onboarding call to understand your product, your best customers and the roles you want to meet.</p>
+        </li>
+        <li>
+          <h3>Build your target list</h3>
+          <p>We research named buyers at relevant trusts, hospitals and care groups who match your brief.</p>
+        </li>
+        <li>
+          <h3>Run personal outreach</h3>
+          <p>Tailored emails, LinkedIn messages and calls, written in your voice and approved by you first.</p>
+        </li>
+        <li>
+          <h3>Book and brief</h3>
+          <p>Meetings go straight into your calendar with a note on who you're meeting and why they're interested.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="pricing">
+    <div class="wrap split">
+      <div>
+        <h2>You pay for meetings, not promises.</h2>
+      </div>
+      <div class="pay">
+        <p class="big">No retainer to start. You pay a fixed fee for each qualified meeting that takes place.</p>
+        <p>Before we begin, we agree in writing what counts as a qualified meeting: the right role, at a target organisation, with a real interest in what you offer. No-shows aren't charged.</p>
+        <p>You get a simple weekly report showing who we've contacted, who replied and which meetings are booked.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="wrap">
+      <div>
+        <h2>Let's see if it's a fit.</h2>
+        <p>Tell us what you supply and who you'd like to meet. A 15-minute chat is enough to know whether we can help.</p>
+      </div>
+      <a class="btn" href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Email kallam@hcpvanta.com</a>
+    </div>
+  </section>
+
+  <section class="block" id="privacy">
+    <div class="wrap">
+      <details class="privacy">
+        <summary>Privacy notice</summary>
+        <div class="privacy-body">
+          <p>Last updated: November 2026</p>
+
+          <h3>Who we are</h3>
+          <p>HCPVanta is a trading name of Kallam Boyle, a sole trader based in the UK. We are the data controller for the personal data described in this notice. Our ICO registration number is [ICO registration number]. You can contact us about data protection at <a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a>.</p>
+
+          <h3>What data we collect</h3>
+          <p>We collect business contact details about people working at healthcare organisations and suppliers: name, job title, organisation, work email address, work phone number and professional profile links. We also keep records of our communications with you.</p>
+
+          <h3>Where we get it</h3>
+          <ul>
+            <li>Directly from you, for example when you email us or reply to a message.</li>
+            <li>Public sources such as organisation websites, LinkedIn and Companies House.</li>
+            <li>Business contact data providers.</li>
+          </ul>
+
+          <h3>Why we use it</h3>
+          <ul>
+            <li>To contact professionals about business services relevant to their role, on our own behalf or on behalf of our clients.</li>
+            <li>To arrange meetings between healthcare buyers and our clients.</li>
+            <li>To manage our relationships with clients and potential clients.</li>
+          </ul>
+          <p>Our lawful basis is legitimate interests: contacting professionals about services relevant to their work. We only contact work email addresses, every message includes a clear way to opt out, and we stop contacting you as soon as you ask.</p>
+
+          <h3>Who we share it with</h3>
+          <p>When you agree to a meeting, we share your name, role, organisation and contact details with the client you'll be meeting. We also use trusted service providers to run the business, such as Google Workspace for email and a customer relationship management (CRM) system. We don't sell your data.</p>
+
+          <h3>How long we keep it</h3>
+          <p>We keep prospect data for no longer than 24 months after our last contact with you, then delete it. If you ask us not to contact you, we keep a minimal record so we can make sure you aren't contacted again.</p>
+
+          <h3>Your rights</h3>
+          <p>You can ask to see the data we hold about you, correct it, delete it, or object to us using it, including for direct marketing. Email <a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a> and we'll respond within one month.</p>
+          <p>If you're unhappy with how we've handled your data, you can complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener">ico.org.uk</a>.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 HCPVanta. A trading name of Kallam Boyle.</span>
+    <span><a href="#privacy">Privacy notice</a> &nbsp;&nbsp; <a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a></span>
+  </div>
+</footer>
+
+<script>
+  // Open the privacy notice when someone follows a link to it.
+  function openPrivacy() {
+    if (location.hash === '#privacy') {
+      var d = document.querySelector('details.privacy');
+      if (d) d.open = true;
+    }
+  }
+  window.addEventListener('hashchange', openPrivacy);
+  openPrivacy();
+</script>
+</body>
+</html>
