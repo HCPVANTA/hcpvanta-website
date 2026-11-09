@@ -26,6 +26,8 @@
     --slot: #E9B949;
     --slot-ink: #2A2207;
     --soft: #E8F0EE;
+    --deep: #12343B;
+    --deep-muted: #C3D6D2;
     --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
     --body: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
   }
@@ -38,6 +40,8 @@
       --muted: #A3B4B5;
       --line: #2A3B40;
       --teal: #6FB8AF;
+      --deep: #0A2328;
+      --deep-muted: #A9C2BE;
       --teal-ink: #0F1A1D;
       --slot: #E9B949;
       --slot-ink: #2A2207;
@@ -99,13 +103,13 @@
   .hero { padding: clamp(3rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5rem); }
   .hero .wrap {
     display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    gap: clamp(2rem, 5vw, 4.5rem);
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
   }
   h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
-  h1 { font-size: clamp(2.3rem, 5.2vw, 3.9rem); font-weight: 800; max-width: 14ch; }
-  .lede { font-size: 1.2rem; color: var(--muted); max-width: 46ch; margin: 1.4rem 0 2rem; }
+  h1 { font-size: clamp(2.3rem, 4.6vw, 3.6rem); font-weight: 800; max-width: 16ch; }
+  .lede { font-size: 1.25rem; color: var(--muted); max-width: 48ch; margin: 1.4rem 0 2rem; }
   .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
   /* The diary: the page's signature element */
@@ -149,7 +153,7 @@
     line-height: 1.3;
   }
   .slot b { display: block; font-size: 0.8rem; }
-  .slot { overflow-wrap: anywhere; hyphens: auto; }
+  .slot { overflow-wrap: break-word; }
   .slot.s1 { margin-top: 1.2rem; }
   .slot.s3 { margin-top: 3.5rem; }
   .slot.s5 { margin-top: 6rem; }
@@ -289,6 +293,64 @@
   @media (max-width: 560px) {
     .about { grid-template-columns: 1fr; }
   }
+  /* Hero visual: setup mock + diary */
+  .visual { display: grid; }
+  .visual figure { margin: 0; }
+  .browser { position: relative; width: 88%; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: visible; box-shadow: 0 18px 40px -24px rgba(18, 52, 59, 0.45); }
+  .browser-bar { display: flex; align-items: center; gap: 0.35rem; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line); }
+  .browser-bar span { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--line); }
+  .browser-bar .url { margin-left: 0.6rem; flex: 1; background: var(--bg); border-radius: 999px; font-size: 0.75rem; color: var(--muted); padding: 0.2rem 0.75rem; }
+  .site-mock { padding: 1rem 1.1rem 1.4rem; }
+  .sm-nav { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+  .sm-nav b { width: 3.2rem; height: 0.7rem; border-radius: 4px; background: var(--teal); }
+  .sm-nav i { width: 2rem; height: 0.45rem; border-radius: 4px; background: var(--line); }
+  .sm-nav b + i { margin-left: auto; }
+  .sm-h { height: 0.95rem; width: 75%; border-radius: 4px; background: var(--ink); opacity: 0.85; margin-bottom: 0.4rem; }
+  .sm-h.short { width: 50%; }
+  .sm-p { height: 0.5rem; width: 62%; border-radius: 4px; background: var(--line); margin: 0.7rem 0 0.9rem; }
+  .sm-btn { display: inline-block; font-size: 0.72rem; font-weight: 700; background: var(--teal); color: var(--teal-ink); border-radius: 999px; padding: 0.3rem 0.75rem; }
+  .sm-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; margin-top: 1rem; width: 58%; }
+  .sm-cards div { height: 2.4rem; border-radius: 8px; background: var(--soft); }
+  .crm-mock { position: absolute; right: -10%; top: 3.2rem; width: 46%; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0.75rem 0.85rem; box-shadow: 0 14px 30px -18px rgba(18, 52, 59, 0.5); }
+  .crm-title { margin: 0 0 0.5rem; font-size: 0.78rem; font-weight: 700; }
+  .crm-mock ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+  .crm-mock li { display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; background: var(--bg); border-radius: 6px; padding: 0.25rem 0.5rem; }
+  .crm-mock li b { font-family: var(--display); color: var(--teal); }
+  .browser figcaption, .visual .diary figcaption { font-size: 0.82rem; }
+  .browser figcaption { color: var(--muted); padding: 0 1.1rem 0.8rem; }
+  .visual .days { gap: 0.35rem; }
+  .visual .col { padding: 0.3rem; min-height: 12.5rem; }
+  .visual .slot { font-size: 0.7rem; padding: 0.4rem; }
+  .visual .slot b { font-size: 0.72rem; }
+  .visual .diary { width: 92%; justify-self: end; margin-top: -2rem; position: relative; box-shadow: 0 18px 40px -24px rgba(18, 52, 59, 0.45); }
+
+  /* Colour bands */
+  section.band-soft { background: var(--soft); border-top: 0; }
+  section.band-soft .sector-grid li, section.band-soft .faq-list details { border-color: transparent; }
+  section.band-deep { background: var(--deep); border-top: 0; color: #FFFFFF; }
+  section.band-deep h2 { color: #FFFFFF; }
+  section.band-deep .side p { color: var(--deep-muted); }
+  section.band-deep .side a:not(.btn) { color: var(--slot); }
+  section.band-deep .btn.ghost { color: #FFFFFF; border-color: #FFFFFF; }
+  section.band-deep form.enquiry { color: var(--ink); border-color: transparent; }
+  section.band-deep + section.block { border-top: 0; }
+
+  /* Sector icons */
+  .sector-grid .ico { width: 2.4rem; height: 2.4rem; color: var(--teal); margin-bottom: 0.75rem; }
+  .sector-grid .ico svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+  @media (max-width: 900px) {
+    .browser, .visual .diary { width: 100%; }
+    .visual .diary { margin-top: 1rem; }
+    .crm-mock { right: 0.75rem; top: auto; bottom: 2.4rem; width: 52%; }
+  }
+  @media (max-width: 560px) {
+    .visual .diary { padding: 0.9rem; }
+    .visual .days { gap: 0.2rem; }
+    .visual .col { padding: 0.15rem; min-height: 11rem; }
+    .visual .slot { font-size: 0.6rem; padding: 0.3rem 0.25rem; line-height: 1.25; }
+    .visual .slot b { font-size: 0.62rem; }
+  }
 </style>
 </head>
 <body>
@@ -318,6 +380,21 @@
         </div>
       </div>
 
+      <div class="visual">
+      <figure class="browser" aria-label="Example of a website and CRM set up for a healthcare business">
+        <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><div class="url">Your new website</div></div>
+        <div class="site-mock" aria-hidden="true">
+          <div class="sm-nav"><b></b><i></i><i></i><i></i></div>
+          <div class="sm-h"></div><div class="sm-h short"></div>
+          <div class="sm-p"></div>
+          <span class="sm-btn">Book a consultation</span>
+          <div class="sm-cards"><div></div><div></div><div></div></div>
+        </div>
+        <div class="crm-mock" aria-hidden="true">
+          <p class="crm-title">Enquiries this week</p>
+          <ul><li><span>New</span><b>6</b></li><li><span>Replied</span><b>4</b></li><li><span>Booked</span><b>3</b></li></ul>
+        </div>
+      </figure>
       <figure class="diary" aria-label="Example of a week of booked meetings">
         <div class="diary-head">
           <strong>Your diary</strong>
@@ -327,37 +404,38 @@
           <div class="day">
             <h3>Mon</h3>
             <div class="col">
-              <div class="slot s1"><b>10:00</b>Head of Estates, hospital trust</div>
+              <div class="slot s1"><b>10:00</b>Head of Estates</div>
             </div>
           </div>
           <div class="day">
             <h3>Tue</h3>
             <div class="col">
-              <div class="slot s2"><b>09:30</b>Owner, pharmacy group</div>
+              <div class="slot s2"><b>09:30</b>Pharmacy owner</div>
             </div>
           </div>
           <div class="day">
             <h3>Wed</h3>
             <div class="col">
-              <div class="slot s3"><b>13:00</b>Practice Manager, GP practice</div>
+              <div class="slot s3"><b>13:00</b>Practice manager</div>
             </div>
           </div>
           <div class="day">
             <h3>Thu</h3>
             <div class="col">
-              <div class="slot s4"><b>11:00</b>Operations Director, care group</div>
-              <div class="slot s6"><b>14:30</b>Practice Owner, dental group</div>
+              <div class="slot s4"><b>11:00</b>Care home director</div>
+              <div class="slot s6"><b>14:30</b>Dental practice owner</div>
             </div>
           </div>
           <div class="day">
             <h3>Fri</h3>
             <div class="col">
-              <div class="slot s5"><b>15:00</b>Procurement Lead, private hospital</div>
+              <div class="slot s5"><b>15:00</b>Hospital buyer</div>
             </div>
           </div>
         </div>
-        <figcaption>An illustration of a supplier’s week. Target buyers are agreed with you before any outreach begins.</figcaption>
+        <figcaption>Above: an example website and CRM. Here: an example week of meetings booked for a supplier.</figcaption>
       </figure>
+      </div>
     </div>
   </section>
 
@@ -394,16 +472,16 @@
     </div>
   </section>
 
-  <section class="block" id="sectors">
+  <section class="block band-soft" id="sectors">
     <div class="wrap">
       <h2>Built around every part of healthcare.</h2>
       <p class="intro">Each sector has its own buyers, language and pressures, so we work sector by sector rather than one size fits all. We work across the UK.</p>
       <ul class="sector-grid">
-        <li><h3>Hospitals and clinics</h3><p>NHS and private hospitals, clinics and the suppliers who serve their estates, procurement and clinical teams.</p></li>
-        <li><h3>Pharmacy</h3><p>Independent pharmacies and pharmacy groups, and the suppliers selling to pharmacy owners and buyers.</p></li>
-        <li><h3>General practice and primary care</h3><p>GP practices and primary care networks, and the suppliers working with practice managers and partners.</p></li>
-        <li><h3>Dental</h3><p>Dental practices and groups, and the suppliers selling to practice owners and managers.</p></li>
-        <li><h3>Care and community</h3><p>Care homes and community providers, and the suppliers working with owners and operations teams.</p></li>
+        <li><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13"/><path d="M2 21h20"/><path d="M12 8v6M9 11h6"/><path d="M10 21v-4h4v4"/></svg></div><h3>Hospitals and clinics</h3><p>NHS and private hospitals, clinics and the suppliers who serve their estates, procurement and clinical teams.</p></li>
+        <li><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></div><h3>Pharmacy</h3><p>Independent pharmacies and pharmacy groups, and the suppliers selling to pharmacy owners and buyers.</p></li>
+        <li><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v3a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/></svg></div><h3>General practice and primary care</h3><p>GP practices and primary care networks, and the suppliers working with practice managers and partners.</p></li>
+        <li><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3C4.5 3 3 5 3 7.5c0 3 1.5 5 2 8 .4 2.5.9 5.5 2.5 5.5S9.1 17 10 15s.8-2 2-2 1.1 0 2 2 .9 6 2.5 6 2.1-3 2.5-5.5c.5-3 2-5 2-8C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/></svg></div><h3>Dental</h3><p>Dental practices and groups, and the suppliers selling to practice owners and managers.</p></li>
+        <li><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M12 17.5s-3-1.8-3-3.7a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 1.9-3 3.7-3 3.7z"/></svg></div><h3>Care and community</h3><p>Care homes and community providers, and the suppliers working with owners and operations teams.</p></li>
       </ul>
     </div>
   </section>
@@ -476,7 +554,7 @@
     </div>
   </section>
 
-  <section class="block" id="faq">
+  <section class="block band-soft" id="faq">
     <div class="wrap">
       <h2>Questions people ask.</h2>
       <div class="faq-list">
@@ -490,7 +568,7 @@
     </div>
   </section>
 
-  <section class="block contact" id="contact">
+  <section class="block contact band-deep" id="contact">
     <div class="wrap contact-grid">
       <div class="side">
         <h2>Let’s see if it’s a fit.</h2>
