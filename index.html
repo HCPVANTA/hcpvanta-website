@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F9F8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0F1A1D">
 <title>HCPVanta | Websites, CRMs, AI and sales meetings for healthcare</title>
 <meta name="description" content="HCPVanta helps healthcare businesses and suppliers grow, with professional websites, CRMs and practical AI tools, plus qualified sales meetings with healthcare buyers.">
 <meta property="og:type" content="website">
@@ -50,7 +53,11 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  :root { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+  a, button, summary { touch-action: manipulation; }
+  .btn, summary { user-select: none; -webkit-user-select: none; }
   body {
     margin: 0;
     background: var(--bg);
@@ -95,7 +102,9 @@
     color: var(--teal-ink);
     border: 2px solid var(--teal);
   }
-  .btn:hover { filter: brightness(1.08); }
+  .btn { transition: transform 160ms var(--ease-out), filter 150ms ease; }
+  .btn:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) { .btn:hover { filter: brightness(1.08); } }
   .btn.ghost { background: transparent; color: var(--teal); }
   header.site .btn { padding: 0.55rem 1.1rem; font-size: 0.95rem; }
 
@@ -160,13 +169,13 @@
   .diary figcaption { color: var(--muted); font-size: 0.88rem; margin-top: 0.9rem; padding: 0 0.25rem; }
 
   @media (prefers-reduced-motion: no-preference) {
-    .slot { opacity: 0; transform: translateY(6px); animation: book 0.5s ease-out forwards; }
-    .slot.s1 { animation-delay: 0.35s; }
-    .slot.s2 { animation-delay: 0.65s; }
-    .slot.s3 { animation-delay: 0.95s; }
-    .slot.s4 { animation-delay: 1.25s; }
-    .slot.s5 { animation-delay: 1.55s; }
-    .slot.s6 { animation-delay: 1.85s; }
+    .slot { opacity: 0; transform: translateY(6px) scale(0.97); animation: book 420ms var(--ease-out) forwards; }
+    .slot.s1 { animation-delay: 520ms; }
+    .slot.s2 { animation-delay: 610ms; }
+    .slot.s3 { animation-delay: 685ms; }
+    .slot.s4 { animation-delay: 745ms; }
+    .slot.s6 { animation-delay: 795ms; }
+    .slot.s5 { animation-delay: 835ms; }
     @keyframes book { to { opacity: 1; transform: none; } }
   }
 
@@ -262,7 +271,8 @@
   }
   .top-nav { display: flex; gap: 1.5rem; margin-left: auto; margin-right: 1.5rem; }
   .top-nav a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.95rem; }
-  .top-nav a:hover { color: var(--teal); }
+  .top-nav a { transition: color 150ms ease; }
+  @media (hover: hover) and (pointer: fine) { .top-nav a:hover { color: var(--teal); } }
   .founding { background: var(--slot); color: var(--slot-ink); border-radius: 18px; padding: clamp(1.5rem, 4vw, 2.5rem); display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; align-items: center; }
   .founding h2 { color: var(--slot-ink); max-width: 20ch; }
   .founding p { margin: 0; max-width: 52ch; }
@@ -351,6 +361,95 @@
     .visual .slot { font-size: 0.6rem; padding: 0.3rem 0.25rem; line-height: 1.25; }
     .visual .slot b { font-size: 0.62rem; }
   }
+  @media (prefers-reduced-motion: no-preference) {
+    details[open] > :not(summary) { animation: reveal 220ms var(--ease-out); }
+    @keyframes reveal { from { opacity: 0; transform: translateY(-4px); } }
+  }
+
+  /* ===== v8: cleaner surfaces ===== */
+  :root {
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --hairline: color-mix(in srgb, var(--line) 75%, transparent);
+    --shadow-card: 0 1px 2px rgba(18, 52, 59, 0.05), 0 12px 32px -18px rgba(18, 52, 59, 0.28);
+    --shadow-float: 0 2px 6px rgba(18, 52, 59, 0.06), 0 24px 48px -24px rgba(18, 52, 59, 0.4);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -18px rgba(0, 0, 0, 0.6);
+      --shadow-float: 0 2px 6px rgba(0, 0, 0, 0.3), 0 24px 48px -24px rgba(0, 0, 0, 0.7);
+    }
+  }
+  section.block { border-top: 0; padding: clamp(4rem, 8vw, 7rem) 0; scroll-margin-top: 4.5rem; }
+  .service, .pay, form.enquiry, .sector-grid li, .faq-list details, details.privacy {
+    border: 1px solid var(--hairline); box-shadow: var(--shadow-card);
+  }
+  .sector-grid li { border-top: 3px solid var(--slot); }
+  .browser, .visual .diary, .crm-mock { border: 1px solid var(--hairline); box-shadow: var(--shadow-float); }
+  h2 { letter-spacing: -0.025em; }
+  .intro { font-size: 1.1rem; }
+
+  /* Sticky, quiet header */
+  header.site {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px); backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color 200ms ease;
+  }
+  header.site.scrolled { border-bottom-color: var(--hairline); }
+
+  /* ===== Hover and press layer ===== */
+  .top-nav a { position: relative; }
+  .top-nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px;
+    background: var(--teal); transform: scaleX(0); transform-origin: left; transition: transform 220ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: scale(0.97); }
+    .top-nav a:hover::after { transform: scaleX(1); }
+    .faq-list summary:hover, details.privacy summary:hover { color: var(--teal); }
+  }
+
+  /* FAQ: a plus that turns into a cross */
+  .faq-list summary, details.privacy summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: color 150ms ease; }
+  .faq-list summary::-webkit-details-marker, details.privacy summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after, details.privacy summary::after {
+    content: "+"; font-family: var(--display); font-size: 1.4rem; line-height: 1; color: var(--teal);
+    transition: transform 220ms var(--ease-out); flex: none;
+  }
+  .faq-list details[open] summary::after, details.privacy[open] summary::after { transform: rotate(45deg); }
+
+  /* ===== Hero entrance: lead, then support, then the visual ===== */
+  @media (prefers-reduced-motion: no-preference) {
+    .enter { opacity: 0; animation: rise 640ms var(--ease-out) forwards; }
+    .e-lead { --rise: 18px; animation-delay: 60ms; }
+    .e-support { --rise: 10px; animation-delay: 180ms; }
+    .e-visual { --rise: 8px; animation-delay: 260ms; animation-duration: 720ms; }
+    @keyframes rise { from { opacity: 0; transform: translateY(var(--rise, 12px)); } to { opacity: 1; transform: none; } }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .enter { animation: fade 300ms ease both; }
+    @keyframes fade { from { opacity: 0; } }
+  }
+
+  /* ===== The moment: the four steps draw in order ===== */
+  ol.steps li { position: relative; border-top: 3px solid var(--line); }
+  ol.steps li::after {
+    content: ""; position: absolute; left: 0; right: 0; top: -3px; height: 3px;
+    background: var(--teal); transform-origin: left;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    ol.steps[data-moment] li::after { transform: scaleX(0); transition: transform 520ms var(--ease-in-out); }
+    ol.steps[data-moment] li::before { color: var(--line); transition: color 260ms ease; }
+    ol.steps[data-moment] li h3, ol.steps[data-moment] li p { opacity: 0.45; transition: opacity 300ms ease; }
+    ol.steps[data-moment].in-view li::after { transform: scaleX(1); }
+    ol.steps[data-moment].in-view li::before { color: var(--teal); }
+    ol.steps[data-moment].in-view li h3, ol.steps[data-moment].in-view li p { opacity: 1; }
+    ol.steps[data-moment].in-view li:nth-child(1)::after, ol.steps[data-moment].in-view li:nth-child(1)::before, ol.steps[data-moment].in-view li:nth-child(1) :is(h3, p) { transition-delay: 0ms; }
+    ol.steps[data-moment].in-view li:nth-child(2)::after, ol.steps[data-moment].in-view li:nth-child(2)::before, ol.steps[data-moment].in-view li:nth-child(2) :is(h3, p) { transition-delay: 380ms; }
+    ol.steps[data-moment].in-view li:nth-child(3)::after, ol.steps[data-moment].in-view li:nth-child(3)::before, ol.steps[data-moment].in-view li:nth-child(3) :is(h3, p) { transition-delay: 720ms; }
+    ol.steps[data-moment].in-view li:nth-child(4)::after, ol.steps[data-moment].in-view li:nth-child(4)::before, ol.steps[data-moment].in-view li:nth-child(4) :is(h3, p) { transition-delay: 1020ms; }
+  }
 </style>
 </head>
 <body>
@@ -372,16 +471,16 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <h1>Helping healthcare businesses and suppliers grow.</h1>
-        <p class="lede">Professional websites, CRMs and practical AI tools for pharmacies, practices, clinics and healthcare suppliers. For suppliers, we also book qualified sales meetings with the people who buy what you sell.</p>
-        <div class="actions">
+        <h1 class="enter e-lead">Helping healthcare businesses and suppliers grow.</h1>
+        <p class="lede enter e-support">Professional websites, CRMs and practical AI tools for pharmacies, practices, clinics and healthcare suppliers. For suppliers, we also book qualified sales meetings with the people who buy what you sell.</p>
+        <div class="actions enter e-support">
           <a class="btn" data-book href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Book a 15-minute chat</a>
           <a class="btn ghost" href="#services">See our services</a>
         </div>
       </div>
 
       <div class="visual">
-      <figure class="browser" aria-label="Example of a website and CRM set up for a healthcare business">
+      <figure class="browser enter e-visual" aria-label="Example of a website and CRM set up for a healthcare business">
         <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><div class="url">Your new website</div></div>
         <div class="site-mock" aria-hidden="true">
           <div class="sm-nav"><b></b><i></i><i></i><i></i></div>
@@ -433,7 +532,6 @@
             </div>
           </div>
         </div>
-        <figcaption>Above: an example website and CRM. Here: an example week of meetings booked for a supplier.</figcaption>
       </figure>
       </div>
     </div>
@@ -490,7 +588,7 @@
     <div class="wrap">
       <h2>How meetings get booked</h2>
       <p class="intro">For suppliers, every campaign follows the same four steps, and nothing goes out without your approval.</p>
-      <ol class="steps">
+      <ol class="steps" data-moment>
         <li>
           <h3>Agree your ideal buyer</h3>
           <p>A short onboarding call to understand your product, your best customers and the roles you want to meet.</p>
@@ -650,6 +748,21 @@
   }
   window.addEventListener('hashchange', openPrivacy);
   openPrivacy();
+</script>
+<script>
+  // Header hairline once the page has scrolled
+  const hdr = document.querySelector('header.site');
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // The steps draw once, when the section is properly in view
+  const steps = document.querySelector('ol.steps[data-moment]');
+  if (steps && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) { steps.classList.add('in-view'); io.disconnect(); }
+    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.4 });
+    io.observe(steps);
+  } else if (steps) { steps.classList.add('in-view'); }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.min.js"></script>
 <script>
