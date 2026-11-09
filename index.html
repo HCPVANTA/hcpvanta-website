@@ -138,7 +138,7 @@
   .diary-head span { color: var(--muted); font-size: 0.9rem; }
   .hero .wrap > * { min-width: 0; }
   .days { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5rem; }
-  .day h3 {
+  .day .day-name {
     font-family: var(--body);
     font-size: 0.85rem;
     font-weight: 700;
@@ -450,9 +450,36 @@
     ol.steps[data-moment].in-view li:nth-child(3)::after, ol.steps[data-moment].in-view li:nth-child(3)::before, ol.steps[data-moment].in-view li:nth-child(3) :is(h3, p) { transition-delay: 720ms; }
     ol.steps[data-moment].in-view li:nth-child(4)::after, ol.steps[data-moment].in-view li:nth-child(4)::before, ol.steps[data-moment].in-view li:nth-child(4) :is(h3, p) { transition-delay: 1020ms; }
   }
+
+  /* ===== v9 polish ===== */
+  .skip { position: absolute; left: 1rem; top: -4rem; z-index: 50; background: var(--teal); color: var(--teal-ink); padding: 0.7rem 1rem; border-radius: 10px; font-weight: 700; text-decoration: none; }
+  .skip:focus-visible { top: 1rem; }
+  .day .day-name { margin: 0 0 0.5rem; font-weight: 700; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, summary { text-wrap: pretty; }
+  .slot b, .crm-mock b, .stat strong { font-variant-numeric: tabular-nums; }
+  ::selection { background: color-mix(in srgb, var(--slot) 55%, transparent); color: var(--ink); }
+
+  /* Fields: clear focus, errors only after the visitor has tried */
+  form.enquiry input, form.enquiry textarea { transition: border-color 150ms ease, box-shadow 150ms ease; }
+  form.enquiry input:focus-visible, form.enquiry textarea:focus-visible {
+    outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal) 25%, transparent);
+  }
+  form.enquiry input:user-invalid, form.enquiry textarea:user-invalid { border-color: #B3261E; }
+  form.enquiry button:disabled { opacity: 0.65; cursor: progress; }
+
+  /* Comfortable tap targets for small links */
+  .top-nav a { padding: 0.6rem 0; }
+  footer.site a { display: inline-block; padding: 0.7rem 0; }
+  footer.site .wrap { align-items: center; }
+
+  @media (max-width: 560px) {
+    .actions .btn, .contact-grid .side .btn, form.enquiry button, .founding .btn { width: 100%; text-align: center; justify-self: stretch; }
+  }
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Skip to content</a>
 
 <header class="site">
   <div class="wrap">
@@ -501,32 +528,32 @@
         </div>
         <div class="days">
           <div class="day">
-            <h3>Mon</h3>
+            <p class="day-name">Mon</p>
             <div class="col">
               <div class="slot s1"><b>10:00</b>Head of Estates</div>
             </div>
           </div>
           <div class="day">
-            <h3>Tue</h3>
+            <p class="day-name">Tue</p>
             <div class="col">
               <div class="slot s2"><b>09:30</b>Pharmacy owner</div>
             </div>
           </div>
           <div class="day">
-            <h3>Wed</h3>
+            <p class="day-name">Wed</p>
             <div class="col">
               <div class="slot s3"><b>13:00</b>Practice manager</div>
             </div>
           </div>
           <div class="day">
-            <h3>Thu</h3>
+            <p class="day-name">Thu</p>
             <div class="col">
               <div class="slot s4"><b>11:00</b>Care home director</div>
               <div class="slot s6"><b>14:30</b>Dental practice owner</div>
             </div>
           </div>
           <div class="day">
-            <h3>Fri</h3>
+            <p class="day-name">Fri</p>
             <div class="col">
               <div class="slot s5"><b>15:00</b>Hospital buyer</div>
             </div>
