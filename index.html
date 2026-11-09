@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HCPVanta | Meetings with hospital buyers for UK healthcare suppliers</title>
-<meta name="description" content="HCPVanta books qualified sales meetings for UK healthcare suppliers with NHS trusts, private hospitals and care groups. You pay only for meetings that happen.">
+<title>HCPVanta | Websites, CRMs, AI and sales meetings for healthcare</title>
+<meta name="description" content="HCPVanta helps healthcare businesses and suppliers grow, with professional websites, CRMs and practical AI tools, plus qualified sales meetings with healthcare buyers.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232F6F6A'/><rect x='7' y='9' width='18' height='4' rx='1' fill='%23E9B949'/><rect x='7' y='16' width='12' height='3' rx='1' fill='white'/><rect x='7' y='22' width='15' height='3' rx='1' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -219,7 +219,26 @@
   footer.site { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
   footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 
+  .services { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+  .service {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column;
+  }
+  .service .step { font-family: var(--display); font-weight: 800; color: var(--teal); font-size: 0.95rem; margin: 0 0 0.6rem; }
+  .service h3 { font-size: clamp(1.35rem, 2.4vw, 1.7rem); margin-bottom: 0.75rem; }
+  .service p { margin: 0 0 1rem; color: var(--muted); }
+  .service ul { list-style: none; padding: 0; margin: 0 0 1.25rem; display: grid; gap: 0.6rem; }
+  .service li { padding-left: 1.5rem; position: relative; }
+  .service li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.65rem; height: 0.65rem; border-radius: 3px; background: var(--slot); }
+  .service .price { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); font-weight: 700; color: var(--ink); }
+  .pay-grid { display: grid; gap: 1rem; }
+  .sector-grid { list-style: none; padding: 0; margin: 2.25rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+  .sector-grid li { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--slot); border-radius: 14px; padding: 1.25rem; }
+  .sector-grid h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+  .sector-grid p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+
   @media (max-width: 900px) {
+    .services { grid-template-columns: 1fr; }
     .hero .wrap, .split { grid-template-columns: 1fr; }
     ol.steps { grid-template-columns: 1fr 1fr; }
   }
@@ -246,11 +265,11 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <h1>Meetings with hospital buyers, booked into your diary.</h1>
-        <p class="lede">HCPVanta finds and contacts the people who buy for NHS trusts, private hospitals and care groups, and books qualified sales meetings for UK healthcare suppliers. You pay only for meetings that happen.</p>
+        <h1>Helping healthcare businesses and suppliers grow.</h1>
+        <p class="lede">Professional websites, CRMs and practical AI tools for pharmacies, practices, clinics and healthcare suppliers. For suppliers, we also book qualified sales meetings with the people who buy what you sell.</p>
         <div class="actions">
           <a class="btn" href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Book a 15-minute chat</a>
-          <a class="btn ghost" href="#how">See how it works</a>
+          <a class="btn ghost" href="#services">See our services</a>
         </div>
       </div>
 
@@ -263,67 +282,91 @@
           <div class="day">
             <h3>Mon</h3>
             <div class="col">
-              <div class="slot s1"><b>10:00</b>Head of Estates, acute trust</div>
+              <div class="slot s1"><b>10:00</b>Head of Estates, hospital trust</div>
             </div>
           </div>
           <div class="day">
             <h3>Tue</h3>
             <div class="col">
-              <div class="slot s2"><b>09:30</b>Infection Prevention Lead, private hospital</div>
+              <div class="slot s2"><b>09:30</b>Owner, pharmacy group</div>
             </div>
           </div>
           <div class="day">
             <h3>Wed</h3>
             <div class="col">
-              <div class="slot s3"><b>13:00</b>Procurement Manager, NHS trust</div>
+              <div class="slot s3"><b>13:00</b>Practice Manager, GP practice</div>
             </div>
           </div>
           <div class="day">
             <h3>Thu</h3>
             <div class="col">
-              <div class="slot s4"><b>11:00</b>Facilities Manager, care group</div>
-              <div class="slot s6"><b>14:30</b>Clinical Nurse Lead, NHS trust</div>
+              <div class="slot s4"><b>11:00</b>Operations Director, care group</div>
+              <div class="slot s6"><b>14:30</b>Practice Owner, dental group</div>
             </div>
           </div>
           <div class="day">
             <h3>Fri</h3>
             <div class="col">
-              <div class="slot s5"><b>15:00</b>Director of Estates, community trust</div>
+              <div class="slot s5"><b>15:00</b>Procurement Lead, private hospital</div>
             </div>
           </div>
         </div>
-        <figcaption>An illustration. Your target buyers are agreed with you before any outreach begins.</figcaption>
+        <figcaption>An illustration of a supplier’s week. Target buyers are agreed with you before any outreach begins.</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="block" id="who">
-    <div class="wrap split">
-      <div>
-        <h2>Built for small suppliers with a strong product and no time to prospect.</h2>
+  <section class="block" id="services">
+    <div class="wrap">
+      <h2>Two services that work together.</h2>
+      <p class="intro">Start with the setup you need to sell properly, then let us fill your diary. Take one or both.</p>
+      <div class="services">
+        <article class="service">
+          <p class="step">Step 1</p>
+          <h3>Get set up</h3>
+          <p>For pharmacies, practices, clinics, care providers and suppliers: a fixed-price package that helps you present your business professionally and run it more efficiently.</p>
+          <ul>
+            <li>A professional website aimed at your patients, customers or buyers</li>
+            <li>A CRM to manage enquiries, relationships and follow-ups</li>
+            <li>Practical AI tools for admin and communication, such as drafting emails, notes and proposals</li>
+            <li>A handover session so your team can use everything from day one</li>
+          </ul>
+          <p class="price">Fixed price, agreed before any work starts. Built in your own accounts, so you own everything. We don’t build systems that store patient health records.</p>
+        </article>
+        <article class="service">
+          <p class="step">Step 2</p>
+          <h3>Meetings with healthcare buyers</h3>
+          <p>For suppliers: we find and contact the people who buy what you sell, in the parts of healthcare you choose, and book qualified sales meetings straight into your diary.</p>
+          <ul>
+            <li>Target buyers and organisations agreed with you first</li>
+            <li>Personal outreach by email, LinkedIn and phone, approved by you</li>
+            <li>Every meeting booked with a short brief on who you're meeting</li>
+            <li>A simple weekly report on progress</li>
+          </ul>
+          <p class="price">Pay per qualified meeting that takes place. No-shows aren't charged.</p>
+        </article>
       </div>
-      <div>
-        <ul class="fit">
-          <li>You're a UK supplier selling into hospitals or care settings, usually with a team of 5 to 50.</li>
-          <li>The founder or managing director still does most of the selling, alongside running the business.</li>
-          <li>You know hospitals need what you offer, but reaching the right buyer takes time you don't have.</li>
-        </ul>
-        <ul class="buyers" aria-label="Examples of buyers we contact">
-          <li>Procurement</li>
-          <li>Estates and facilities</li>
-          <li>Infection prevention</li>
-          <li>Clinical leads</li>
-          <li>Workforce and HR</li>
-          <li>Digital and IT</li>
-        </ul>
-      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sectors">
+    <div class="wrap">
+      <h2>Built around every part of healthcare.</h2>
+      <p class="intro">Each sector has its own buyers, language and pressures, so we work sector by sector rather than one size fits all. We work across the UK.</p>
+      <ul class="sector-grid">
+        <li><h3>Hospitals and clinics</h3><p>NHS and private hospitals, clinics and the suppliers who serve their estates, procurement and clinical teams.</p></li>
+        <li><h3>Pharmacy</h3><p>Independent pharmacies and pharmacy groups, and the suppliers selling to pharmacy owners and buyers.</p></li>
+        <li><h3>General practice and primary care</h3><p>GP practices and primary care networks, and the suppliers working with practice managers and partners.</p></li>
+        <li><h3>Dental</h3><p>Dental practices and groups, and the suppliers selling to practice owners and managers.</p></li>
+        <li><h3>Care and community</h3><p>Care homes and community providers, and the suppliers working with owners and operations teams.</p></li>
+      </ul>
     </div>
   </section>
 
   <section class="block" id="how">
     <div class="wrap">
-      <h2>How it works</h2>
-      <p class="intro">Every campaign follows the same four steps, and nothing goes out without your approval.</p>
+      <h2>How meetings get booked</h2>
+      <p class="intro">For suppliers, every campaign follows the same four steps, and nothing goes out without your approval.</p>
       <ol class="steps">
         <li>
           <h3>Agree your ideal buyer</h3>
@@ -331,7 +374,7 @@
         </li>
         <li>
           <h3>Build your target list</h3>
-          <p>We research named buyers at relevant trusts, hospitals and care groups who match your brief.</p>
+          <p>We research named buyers at healthcare organisations in your chosen sectors who match your brief.</p>
         </li>
         <li>
           <h3>Run personal outreach</h3>
@@ -348,12 +391,17 @@
   <section class="block" id="pricing">
     <div class="wrap split">
       <div>
-        <h2>You pay for meetings, not promises.</h2>
+        <h2>Clear pricing, with no surprises.</h2>
       </div>
-      <div class="pay">
-        <p class="big">No retainer to start. You pay a fixed fee for each qualified meeting that takes place.</p>
-        <p>Before we begin, we agree in writing what counts as a qualified meeting: the right role, at a target organisation, with a real interest in what you offer. No-shows aren't charged.</p>
-        <p>You get a simple weekly report showing who we've contacted, who replied and which meetings are booked.</p>
+      <div class="pay-grid">
+        <div class="pay">
+          <p class="big">Setup: one fixed price, agreed before we start.</p>
+          <p>We scope what you need on a short call and confirm the price in writing. Ongoing support is optional, with clear limits on what's included.</p>
+        </div>
+        <div class="pay">
+          <p class="big">Meetings: you pay for each qualified meeting that takes place.</p>
+          <p>Before we begin, we agree in writing what counts as a qualified meeting: the right role, at a target organisation, with a real interest in what you offer. No-shows aren't charged, and there's no retainer to start.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -362,7 +410,7 @@
     <div class="wrap">
       <div>
         <h2>Let's see if it's a fit.</h2>
-        <p>Tell us what you supply and who you'd like to meet. A 15-minute chat is enough to know whether we can help.</p>
+        <p>Tell us about your business and what you’d like to achieve. A 15-minute chat is enough to know whether we can help.</p>
       </div>
       <a class="btn" href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Email kallam@hcpvanta.com</a>
     </div>
@@ -394,6 +442,7 @@
             <li>To arrange meetings between healthcare buyers and our clients.</li>
             <li>To manage our relationships with clients and potential clients.</li>
           </ul>
+          <p>When we set up websites, CRMs or other tools for a client, we build them in the client's own accounts and act only on their instructions. Any personal data held in those systems is the client's responsibility under their own privacy notice.</p>
           <p>Our lawful basis is legitimate interests: contacting professionals about services relevant to their work. We only contact work email addresses, every message includes a clear way to opt out, and we stop contacting you as soon as you ask.</p>
 
           <h3>Who we share it with</h3>
