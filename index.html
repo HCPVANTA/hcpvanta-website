@@ -482,9 +482,58 @@
   #scene3d { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; }
   main, footer.site { position: relative; z-index: 1; }
   section.band-soft { background: color-mix(in srgb, var(--soft) 78%, transparent); }
+
+  /* ===== Opening intro: heartbeat (first visit only) ===== */
+  #intro { display: none; }
+  .has-intro #intro { display: block; position: fixed; inset: 0; z-index: 100; cursor: pointer; }
+  #intro .half { position: absolute; left: 0; right: 0; height: 50%; background: #12343B; display: flex; justify-content: center; }
+  #intro .top { top: 0; align-items: flex-end; padding-bottom: clamp(3.5rem, 9vh, 5.5rem); }
+  #intro .bottom { bottom: 0; align-items: flex-start; padding-top: clamp(3.5rem, 9vh, 5.5rem); }
+  .has-intro #intro .top { animation: open-top 720ms var(--ease-in-out) 1300ms forwards; }
+  .has-intro #intro .bottom { animation: open-bottom 720ms var(--ease-in-out) 1300ms forwards; }
+  #intro .ecg { position: absolute; left: 0; top: 50%; width: 100%; height: clamp(110px, 18vh, 170px); transform: translateY(-50%); overflow: visible; }
+  #intro .ecg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  #intro .trace { stroke: #8FD0C6; stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 900ms var(--ease-in-out) 150ms forwards, fade-out 260ms ease 1200ms forwards; }
+  #intro .pulse { stroke: #E9B949; stroke-width: 5; stroke-dasharray: 0.05 1; stroke-dashoffset: 0.05; filter: drop-shadow(0 0 6px rgba(233, 185, 73, 0.8)); animation: pulse 900ms var(--ease-in-out) 150ms forwards, fade-out 200ms ease 1050ms forwards; }
+  .intro-word { font-family: var(--display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: 1; opacity: 0; transform: translateY(10px); animation: show 520ms var(--ease-out) 640ms forwards; }
+  .intro-word .hcp { color: #FFFFFF; }
+  .intro-word .vanta { color: #8FD0C6; }
+  .intro-tag { margin: 0; color: #C3D6D2; font-size: clamp(1rem, 2vw, 1.15rem); letter-spacing: 0.01em; opacity: 0; transform: translateY(-8px); animation: show 520ms var(--ease-out) 760ms forwards; }
+  @keyframes trace { to { stroke-dashoffset: 0; } }
+  @keyframes pulse { to { stroke-dashoffset: -0.96; } }
+  @keyframes fade-out { to { opacity: 0; } }
+  @keyframes show { to { opacity: 1; transform: none; } }
+  @keyframes open-top { to { transform: translateY(-100%); } }
+  @keyframes open-bottom { to { transform: translateY(100%); } }
+  #intro.skipping { transition: opacity 220ms ease; opacity: 0; }
+
+  /* The page's own entrance waits for the reveal */
+  .has-intro .e-lead { animation-delay: 1500ms; }
+  .has-intro .e-support { animation-delay: 1620ms; }
+  .has-intro .e-visual { animation-delay: 1700ms; }
+  .has-intro .slot.s1 { animation-delay: 1920ms; }
+  .has-intro .slot.s2 { animation-delay: 2010ms; }
+  .has-intro .slot.s3 { animation-delay: 2085ms; }
+  .has-intro .slot.s4 { animation-delay: 2145ms; }
+  .has-intro .slot.s6 { animation-delay: 2195ms; }
+  .has-intro .slot.s5 { animation-delay: 2235ms; }
 </style>
 </head>
 <body>
+<script>
+  try {
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !localStorage.getItem('hcpv-intro-seen'))
+      document.documentElement.classList.add('has-intro');
+  } catch (e) {}
+</script>
+<div id="intro" aria-hidden="true">
+  <div class="half top"><div class="intro-word"><span class="hcp">HCP</span><span class="vanta">Vanta</span></div></div>
+  <div class="half bottom"><p class="intro-tag">Helping healthcare grow</p></div>
+  <svg class="ecg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+    <path class="trace" d="M0 100 H430 L455 100 L470 78 L485 100 L520 100 L540 20 L565 180 L585 100 L615 100 L635 84 L655 100 H1200" pathLength="1"/>
+    <path class="pulse" d="M0 100 H430 L455 100 L470 78 L485 100 L520 100 L540 20 L565 180 L585 100 L615 100 L635 84 L655 100 H1200" pathLength="1"/>
+  </svg>
+</div>
 <a class="skip" href="#top">Skip to content</a>
 <canvas id="scene3d" aria-hidden="true"></canvas>
 
@@ -784,6 +833,25 @@
     }, { rootMargin: '0px 0px -25% 0px', threshold: 0.4 });
     io.observe(steps);
   } else if (steps) { steps.classList.add('in-view'); }
+</script>
+<script>
+  // Intro: plays once per visitor, and any click, key or scroll skips it
+  (function () {
+    const intro = document.getElementById('intro');
+    if (!document.documentElement.classList.contains('has-intro')) { intro.remove(); return; }
+    try { localStorage.setItem('hcpv-intro-seen', '1'); } catch (e) {}
+    let done = false;
+    const events = ['click', 'keydown', 'wheel', 'touchstart'];
+    const finish = () => { if (done) return; done = true; intro.remove(); events.forEach(ev => removeEventListener(ev, skip)); };
+    const skip = () => {
+      if (done) return;
+      intro.classList.add('skipping');
+      document.querySelectorAll('.has-intro .enter, .has-intro .slot').forEach(el => el.style.animationDelay = '0ms');
+      setTimeout(finish, 240);
+    };
+    events.forEach(ev => addEventListener(ev, skip, { passive: true }));
+    setTimeout(finish, 2100);
+  })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
 <script>
