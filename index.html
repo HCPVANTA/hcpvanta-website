@@ -11,6 +11,15 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.hcpvanta.com/">
 <meta property="og:title" content="HCPVanta | Helping healthcare businesses and suppliers grow">
+<link rel="canonical" href="https://www.hcpvanta.com/">
+<meta property="og:image" content="https://www.hcpvanta.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="HCPVanta">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"HCPVanta","url":"https://www.hcpvanta.com/","email":"kallam@hcpvanta.com","areaServed":"GB","description":"Websites, CRMs and practical AI tools for healthcare businesses, and qualified sales meetings with healthcare buyers for suppliers."}</script>
 <meta property="og:description" content="Professional websites, CRMs and practical AI tools for healthcare businesses, plus qualified sales meetings with healthcare buyers for suppliers.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232F6F6A'/><rect x='7' y='9' width='18' height='4' rx='1' fill='%23E9B949'/><rect x='7' y='16' width='12' height='3' rx='1' fill='white'/><rect x='7' y='22' width='15' height='3' rx='1' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -267,7 +276,6 @@
     .col { min-height: 12rem; padding: 0.25rem; }
     .slot { font-size: 0.68rem; padding: 0.35rem; }
     .slot b { font-size: 0.7rem; }
-    header.site .btn { display: none; }
   }
   .top-nav { display: flex; gap: 1.5rem; margin-left: auto; margin-right: 1.5rem; }
   .top-nav a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.95rem; }
@@ -478,62 +486,51 @@
   }
 
   /* ===== 3D layer ===== */
-  @media (min-width: 901px) { .visual { min-height: 34rem; align-content: end; } .visual .diary { margin-top: 0; width: 100%; } }
   #scene3d { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; }
   main, footer.site { position: relative; z-index: 1; }
   section.band-soft { background: color-mix(in srgb, var(--soft) 78%, transparent); }
 
-  /* ===== Opening intro: heartbeat (first visit only) ===== */
-  #intro { display: none; }
-  .has-intro #intro { display: block; position: fixed; inset: 0; z-index: 100; cursor: pointer; }
-  #intro .half { position: absolute; left: 0; right: 0; height: 50%; background: #12343B; display: flex; justify-content: center; }
-  #intro .top { top: 0; align-items: flex-end; padding-bottom: clamp(3.5rem, 9vh, 5.5rem); }
-  #intro .bottom { bottom: 0; align-items: flex-start; padding-top: clamp(3.5rem, 9vh, 5.5rem); }
-  .has-intro #intro .top { animation: open-top 720ms var(--ease-in-out) 1300ms forwards; }
-  .has-intro #intro .bottom { animation: open-bottom 720ms var(--ease-in-out) 1300ms forwards; }
-  #intro .ecg { position: absolute; left: 0; top: 50%; width: 100%; height: clamp(110px, 18vh, 170px); transform: translateY(-50%); overflow: visible; }
-  #intro .ecg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  #intro .trace { stroke: #8FD0C6; stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 900ms var(--ease-in-out) 150ms forwards, fade-out 260ms ease 1200ms forwards; }
-  #intro .pulse { stroke: #E9B949; stroke-width: 5; stroke-dasharray: 0.05 1; stroke-dashoffset: 0.05; filter: drop-shadow(0 0 6px rgba(233, 185, 73, 0.8)); animation: pulse 900ms var(--ease-in-out) 150ms forwards, fade-out 200ms ease 1050ms forwards; }
-  .intro-word { font-family: var(--display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: 1; opacity: 0; transform: translateY(10px); animation: show 520ms var(--ease-out) 640ms forwards; }
-  .intro-word .hcp { color: #FFFFFF; }
-  .intro-word .vanta { color: #8FD0C6; }
-  .intro-tag { margin: 0; color: #C3D6D2; font-size: clamp(1rem, 2vw, 1.15rem); letter-spacing: 0.01em; opacity: 0; transform: translateY(-8px); animation: show 520ms var(--ease-out) 760ms forwards; }
-  @keyframes trace { to { stroke-dashoffset: 0; } }
-  @keyframes pulse { to { stroke-dashoffset: -0.96; } }
-  @keyframes fade-out { to { opacity: 0; } }
-  @keyframes show { to { opacity: 1; transform: none; } }
-  @keyframes open-top { to { transform: translateY(-100%); } }
-  @keyframes open-bottom { to { transform: translateY(100%); } }
-  #intro.skipping { transition: opacity 220ms ease; opacity: 0; }
+  /* ===== v10 ===== */
+  .visual .diary { margin-top: 0; width: 100%; }
+  .cross-stage { height: clamp(12.5rem, 24vw, 17rem); display: grid; place-items: center; }
+  .cross-fallback { width: min(78%, 22rem); color: var(--teal); }
+  .has-3d .cross-fallback { opacity: 0; transition: opacity 400ms ease; }
 
-  /* The page's own entrance waits for the reveal */
-  .has-intro .e-lead { animation-delay: 1500ms; }
-  .has-intro .e-support { animation-delay: 1620ms; }
-  .has-intro .e-visual { animation-delay: 1700ms; }
-  .has-intro .slot.s1 { animation-delay: 1920ms; }
-  .has-intro .slot.s2 { animation-delay: 2010ms; }
-  .has-intro .slot.s3 { animation-delay: 2085ms; }
-  .has-intro .slot.s4 { animation-delay: 2145ms; }
-  .has-intro .slot.s6 { animation-delay: 2195ms; }
-  .has-intro .slot.s5 { animation-delay: 2235ms; }
+  /* Diary leans gently towards the pointer (desktop only) */
+  .visual { perspective: 1100px; }
+  .visual .diary { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 320ms var(--ease-out); will-change: transform; }
+
+  header.site .btn .short { display: none; }
+  @media (max-width: 560px) {
+    header.site .btn { padding: 0.6rem 0.95rem; font-size: 0.9rem; min-height: 44px; display: inline-flex; align-items: center; }
+    header.site .btn .long { display: none; }
+    header.site .btn .short { display: inline; }
+  }
+
+  footer.site { border-top: 1px solid var(--hairline); padding: 2.5rem 0 3rem; }
+  footer.site .wrap { align-items: flex-start; gap: 1.5rem 3rem; }
+  footer.site p { margin: 0.5rem 0 0; }
+  footer.site nav { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+  footer.site nav a { color: var(--ink); text-decoration: none; font-weight: 700; }
+  @media (hover: hover) and (pointer: fine) { footer.site nav a:hover { color: var(--teal); } }
+
+  header.site .brand, footer.site .brand { display: inline-flex; align-items: center; min-height: 44px; }
+  /* Reserved, empty spaces the 3D cross moves between (desktop only) */
+  .cross-spot { display: none; }
+  @media (min-width: 1000px) {
+    .cross-spot { display: block; min-height: 13rem; }
+    .with-spot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(14rem, 24rem); gap: 2rem; align-items: center; }
+    .with-spot .cross-spot { min-height: 11rem; }
+    .faq-wrap { grid-template-columns: minmax(0, 820px) minmax(14rem, 1fr); align-items: start; margin-top: 2rem; }
+    .faq-wrap .faq-list { margin-top: 0; }
+    .faq-wrap .cross-spot { min-height: 20rem; position: sticky; top: 6rem; }
+    #pricing .cross-spot { min-height: 18rem; margin-top: 1.5rem; }
+    .about { grid-template-columns: auto minmax(0, 1fr) minmax(14rem, 22rem); }
+    .about .cross-spot { min-height: 14rem; align-self: center; }
+  }
 </style>
 </head>
 <body>
-<script>
-  try {
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !localStorage.getItem('hcpv-intro-seen'))
-      document.documentElement.classList.add('has-intro');
-  } catch (e) {}
-</script>
-<div id="intro" aria-hidden="true">
-  <div class="half top"><div class="intro-word"><span class="hcp">HCP</span><span class="vanta">Vanta</span></div></div>
-  <div class="half bottom"><p class="intro-tag">Helping healthcare grow</p></div>
-  <svg class="ecg" viewBox="0 0 1200 200" preserveAspectRatio="none">
-    <path class="trace" d="M0 100 H430 L455 100 L470 78 L485 100 L520 100 L540 20 L565 180 L585 100 L615 100 L635 84 L655 100 H1200" pathLength="1"/>
-    <path class="pulse" d="M0 100 H430 L455 100 L470 78 L485 100 L520 100 L540 20 L565 180 L585 100 L615 100 L635 84 L655 100 H1200" pathLength="1"/>
-  </svg>
-</div>
 <a class="skip" href="#top">Skip to content</a>
 <canvas id="scene3d" aria-hidden="true"></canvas>
 
@@ -546,12 +543,12 @@
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn" data-book href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta">Book a 15-minute chat</a>
+    <a class="btn" data-book href="mailto:kallam@hcpvanta.com?subject=Booking%20a%20chat%20about%20HCPVanta"><span class="long">Book a 15-minute chat</span><span class="short">Book a chat</span></a>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero" data-3d="hero">
+  <section class="hero">
     <div class="wrap">
       <div>
         <h1 class="enter e-lead">Helping healthcare businesses and suppliers grow.</h1>
@@ -563,6 +560,9 @@
       </div>
 
       <div class="visual">
+      <div class="cross-stage" data-stage aria-hidden="true">
+        <svg class="cross-fallback" viewBox="0 0 200 120"><ellipse cx="100" cy="60" rx="92" ry="24" fill="none" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.2"/><path d="M88 14h24v34h34v24h-34v34H88V72H54V48h34z" fill="currentColor"/><circle cx="16" cy="50" r="6" fill="#E9B949"/><circle cx="170" cy="76" r="6" fill="#E9B949"/><circle cx="128" cy="38" r="5" fill="#E9B949"/></svg>
+      </div>
       
       <figure class="diary" aria-label="Example of a week of booked meetings">
         <div class="diary-head">
@@ -607,10 +607,15 @@
     </div>
   </section>
 
-  <section class="block" id="services" data-3d="right">
+  <section class="block" id="services">
     <div class="wrap">
-      <h2>Two services that work together.</h2>
-      <p class="intro">Start with the setup you need to sell properly, then let us fill your diary. Take one or both.</p>
+      <div class="with-spot">
+        <div>
+          <h2>Two services that work together.</h2>
+          <p class="intro">Start with the setup you need to sell properly, then let us fill your diary. Take one or both.</p>
+        </div>
+        <div class="cross-spot" data-stage aria-hidden="true"></div>
+      </div>
       <div class="services">
         <article class="service">
           <p class="step">Step 1</p>
@@ -640,7 +645,7 @@
     </div>
   </section>
 
-  <section class="block band-soft" id="sectors" data-3d="left">
+  <section class="block band-soft" id="sectors">
     <div class="wrap">
       <h2>Built around every part of healthcare.</h2>
       <p class="intro">Each sector has its own buyers, language and pressures, so we work sector by sector rather than one size fits all. We work across the UK.</p>
@@ -654,7 +659,7 @@
     </div>
   </section>
 
-  <section class="block" id="how" data-3d="dim">
+  <section class="block" id="how">
     <div class="wrap">
       <h2>How meetings get booked</h2>
       <p class="intro">For suppliers, every campaign follows the same four steps, and nothing goes out without your approval.</p>
@@ -679,10 +684,11 @@
     </div>
   </section>
 
-  <section class="block" id="pricing" data-3d="left">
+  <section class="block" id="pricing">
     <div class="wrap split">
       <div>
         <h2>Clear pricing, with no surprises.</h2>
+        <div class="cross-spot" data-stage aria-hidden="true"></div>
       </div>
       <div class="pay-grid">
         <div class="pay">
@@ -697,7 +703,7 @@
     </div>
   </section>
 
-  <section class="block" id="founding" data-3d="right">
+  <section class="block" id="founding">
     <div class="wrap">
       <div class="founding">
         <div>
@@ -711,7 +717,7 @@
     </div>
   </section>
 
-  <section class="block" id="about" data-3d="right">
+  <section class="block" id="about">
     <div class="wrap about">
       <div class="avatar" aria-hidden="true">KB</div>
       <div>
@@ -719,12 +725,14 @@
         <p>HCPVanta is run by Kallam Boyle, who has a background in B2B sales across the healthcare sector. Kallam set up HCPVanta to give healthcare businesses and suppliers the tools and the introductions they need to grow, without the cost of a large agency.</p>
         <p>You deal with Kallam directly, from the first call to handover, and nothing goes out in your name without your approval.</p>
       </div>
+      <div class="cross-spot" data-stage aria-hidden="true"></div>
     </div>
   </section>
 
-  <section class="block band-soft" id="faq" data-3d="right">
+  <section class="block band-soft" id="faq">
     <div class="wrap">
       <h2>Questions people ask.</h2>
+      <div class="with-spot faq-wrap">
       <div class="faq-list">
         <details><summary>Who owns the website, CRM and data?</summary><p>You do. We build everything in accounts registered in your name, and hand over full access at the end of the project.</p></details>
         <details><summary>Do you handle patient data?</summary><p>No. We don’t build systems that store patient health records, and we don’t market to patients on your behalf. If you need patient-facing tools such as booking, we can point you to established healthcare platforms that meet the required standards and link them from your website.</p></details>
@@ -733,10 +741,12 @@
         <details><summary>Do I have to take both services?</summary><p>No. Many clients only need the setup. Suppliers can add meetings with healthcare buyers at any point.</p></details>
         <details><summary>How do you contact buyers for suppliers?</summary><p>With personal emails, LinkedIn messages and calls to business contacts only. Every message includes a simple way to opt out, and we follow UK data protection and electronic marketing rules.</p></details>
       </div>
+        <div class="cross-spot" data-stage aria-hidden="true"></div>
+      </div>
     </div>
   </section>
 
-  <section class="block contact band-deep" id="contact" data-3d="hide">
+  <section class="block contact band-deep" id="contact">
     <div class="wrap contact-grid">
       <div class="side">
         <h2>Let’s see if it’s a fit.</h2>
@@ -757,7 +767,7 @@
     </div>
   </section>
 
-  <section class="block" id="privacy" data-3d="hide">
+  <section class="block" id="privacy">
     <div class="wrap">
       <details class="privacy">
         <summary>Privacy notice</summary>
@@ -765,7 +775,7 @@
           <p>Last updated: November 2026</p>
 
           <h3>Who we are</h3>
-          <p>HCPVanta is a trading name of Kallam Boyle, a sole trader based in the UK. We are the data controller for the personal data described in this notice. Our ICO registration number is [ICO registration number]. You can contact us about data protection at <a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a>.</p>
+          <p>HCPVanta is a trading name of Kallam Boyle, a sole trader based in the UK. We are the data controller for the personal data described in this notice. You can contact us about data protection at <a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a>.</p>
 
           <h3>What data we collect</h3>
           <p>We collect business contact details about people working at healthcare organisations and suppliers: name, job title, organisation, work email address, work phone number and professional profile links. We also keep records of our communications with you.</p>
@@ -803,184 +813,12 @@
 
 <footer class="site">
   <div class="wrap">
-    <span>© 2026 HCPVanta. A trading name of Kallam Boyle.</span>
-    <span><a href="#privacy">Privacy notice</a> &nbsp;&nbsp; <a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a></span>
+    <div><a class="brand" href="#top" aria-label="HCPVanta home">HCP<span>Vanta</span></a><p>© 2026 HCPVanta. A trading name of Kallam Boyle.</p></div>
+    <nav aria-label="Footer"><a href="#services">Services</a><a href="#sectors">Sectors</a><a href="#faq">FAQ</a><a href="#privacy">Privacy notice</a><a href="mailto:kallam@hcpvanta.com">kallam@hcpvanta.com</a></nav>
   </div>
 </footer>
 
-<script>
-  // Open the privacy notice when someone follows a link to it.
-  function openPrivacy() {
-    if (location.hash === '#privacy') {
-      var d = document.querySelector('details.privacy');
-      if (d) d.open = true;
-    }
-  }
-  window.addEventListener('hashchange', openPrivacy);
-  openPrivacy();
-</script>
-<script>
-  // Header hairline once the page has scrolled
-  const hdr = document.querySelector('header.site');
-  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 8);
-  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
-
-  // The steps draw once, when the section is properly in view
-  const steps = document.querySelector('ol.steps[data-moment]');
-  if (steps && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => {
-      if (entries.some(e => e.isIntersecting)) { steps.classList.add('in-view'); io.disconnect(); }
-    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.4 });
-    io.observe(steps);
-  } else if (steps) { steps.classList.add('in-view'); }
-</script>
-<script>
-  // Intro: plays once per visitor, and any click, key or scroll skips it
-  (function () {
-    const intro = document.getElementById('intro');
-    if (!document.documentElement.classList.contains('has-intro')) { intro.remove(); return; }
-    try { localStorage.setItem('hcpv-intro-seen', '1'); } catch (e) {}
-    let done = false;
-    const events = ['click', 'keydown', 'wheel', 'touchstart'];
-    const finish = () => { if (done) return; done = true; intro.remove(); events.forEach(ev => removeEventListener(ev, skip)); };
-    const skip = () => {
-      if (done) return;
-      intro.classList.add('skipping');
-      document.querySelectorAll('.has-intro .enter, .has-intro .slot').forEach(el => el.style.animationDelay = '0ms');
-      setTimeout(finish, 240);
-    };
-    events.forEach(ev => addEventListener(ev, skip, { passive: true }));
-    setTimeout(finish, 2100);
-  })();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
-<script>
-(function () {
-  if (!window.THREE) return;
-  const canvas = document.getElementById('scene3d');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const small = matchMedia('(max-width: 900px)');
-  let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' }); }
-  catch (e) { canvas.remove(); return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-  camera.position.set(0, 0, 14);
-
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x9fb8b3, 0.95));
-  const key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(4, 6, 8); scene.add(key);
-  const warm = new THREE.DirectionalLight(0xE9B949, 0.7); warm.position.set(-6, -3, 3); scene.add(warm);
-
-  // A soft, rounded medical cross
-  const a = 0.55, l = 1.6, sh = new THREE.Shape();
-  sh.moveTo(-a, l); sh.lineTo(a, l); sh.lineTo(a, a); sh.lineTo(l, a); sh.lineTo(l, -a); sh.lineTo(a, -a);
-  sh.lineTo(a, -l); sh.lineTo(-a, -l); sh.lineTo(-a, -a); sh.lineTo(-l, -a); sh.lineTo(-l, a); sh.lineTo(-a, a); sh.closePath();
-  const geo = new THREE.ExtrudeGeometry(sh, { depth: 0.7, bevelEnabled: true, bevelThickness: 0.28, bevelSize: 0.24, bevelSegments: 10, curveSegments: 10 });
-  geo.center();
-  const tealMat = new THREE.MeshPhysicalMaterial({ color: 0x2F6F6A, roughness: 0.25, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.12 });
-  const cross = new THREE.Mesh(geo, tealMat);
-
-  // An orbit with three "booked meetings"
-  const R = 2.9, tilt = Math.PI / 2.4;
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(R, 0.022, 12, 200), new THREE.MeshBasicMaterial({ color: 0x2F6F6A, transparent: true, opacity: 0.22 }));
-  ring.rotation.x = tilt;
-  const goldMat = new THREE.MeshPhysicalMaterial({ color: 0xE9B949, roughness: 0.3, clearcoat: 0.8 });
-  const dots = [0, 1, 2].map(() => new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), goldMat));
-
-  const group = new THREE.Group();
-  group.add(cross, ring, ...dots);
-  scene.add(group);
-
-  const dark = matchMedia('(prefers-color-scheme: dark)');
-  const lin = hex => new THREE.Color(hex).convertSRGBToLinear();
-  goldMat.color.copy(lin(0xE9B949));
-  const tint = () => { tealMat.color.copy(lin(dark.matches ? 0x5FA79E : 0x2F6F6A)); ring.material.color.copy(lin(dark.matches ? 0x6FB8AF : 0x2F6F6A)); };
-  tint(); dark.addEventListener && dark.addEventListener('change', tint);
-
-  const sections = [...document.querySelectorAll('[data-3d]')];
-  const view = () => { const h = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z; return { h, w: h * camera.aspect }; };
-  const resize = () => { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); };
-  resize(); addEventListener('resize', resize);
-
-  const target = { x: 0, y: 0, s: 1, o: 1 }, cur = { x: 0, y: 0, s: 1, o: 0 };
-  function aim() {
-    const mid = innerHeight * 0.5; let active = sections[0];
-    for (const sec of sections) if (sec.getBoundingClientRect().top <= mid) active = sec;
-    const mode = reduce ? (active.dataset['3d'] === 'hide' ? 'hide' : 'hero') : active.dataset['3d'];
-    const { w, h } = view();
-    if (small.matches) {
-      target.x = w * 0.22; target.y = h * 0.12; target.s = 0.62;
-      target.o = mode === 'hide' ? 0 : mode === 'hero' ? 0.55 : 0.16;
-      return;
-    }
-    const side = Math.min(w * 0.38, 7.4);
-    target.s = mode === 'hero' ? 0.82 : 0.85;
-    target.x = mode === 'left' ? -side : mode === 'hero' ? w * 0.25 : side;
-    target.y = mode === 'hero' ? h * 0.19 : 0;
-    target.o = mode === 'hide' ? 0 : mode === 'dim' ? 0.18 : 1;
-  }
-
-  let last = performance.now(), running = true;
-  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) { last = performance.now(); requestAnimationFrame(frame); } });
-  function frame(now) {
-    if (!running) return;
-    const dt = Math.min((now - last) / 1000, 0.05); last = now;
-    aim();
-    const k = 1 - Math.pow(0.02, dt);       // smooth, interruptible follow
-    for (const p of ['x', 'y', 's', 'o']) cur[p] += (target[p] - cur[p]) * k;
-    group.position.set(cur.x, cur.y, 0);
-    group.scale.setScalar(cur.s);
-    canvas.style.opacity = cur.o.toFixed(3);
-    const t = reduce ? 0 : now / 1000, sc = reduce ? 0 : scrollY * 0.0012;
-    cross.rotation.set(0.3 + Math.sin(t * 0.4) * 0.2 + sc * 0.35, 0.6 + t * 0.25 + sc, Math.sin(t * 0.3) * 0.08);
-    group.position.y += reduce ? 0 : Math.sin(t * 0.9) * 0.12;
-    dots.forEach((d, i) => {
-      const ang = t * 0.6 + i * 2.094 + sc * 1.5;
-      d.position.set(Math.cos(ang) * R, Math.sin(ang) * R * Math.cos(tilt), Math.sin(ang) * R * Math.sin(tilt));
-    });
-    renderer.render(scene, camera);
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.min.js"></script>
-<script>
-  // Paste your booking page link between the quotes to make every "Book a chat" button open it.
-  const BOOKING_URL = '';
-  if (BOOKING_URL) document.querySelectorAll('[data-book]').forEach(a => { a.href = BOOKING_URL; a.target = '_blank'; a.rel = 'noopener'; });
-
-  // Website enquiries go straight into the CRM's Enquiries page.
-  const form = document.getElementById('enquiry');
-  const statusEl = form.querySelector('.status');
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    statusEl.className = 'status'; statusEl.textContent = '';
-    if (form.website.value) return; // spam trap
-    if (!form.reportValidity()) return;
-    const btn = form.querySelector('button'); btn.disabled = true; btn.textContent = 'Sending…';
-    try {
-      const sb = supabase.createClient('https://mecsynzptzniesrbsmzs.supabase.co', 'sb_publishable_iwDTYmjOtvCz_9FCFiGZEQ_SD8Vdppi');
-      const { error } = await sb.from('enquiries').insert({
-        name: form.name.value.trim(),
-        email: form.email.value.trim().toLowerCase(),
-        company: form.company.value.trim() || null,
-        message: form.message.value.trim(),
-      });
-      if (error) throw error;
-      form.reset();
-      statusEl.className = 'status ok';
-      statusEl.textContent = 'Thanks, your enquiry has been sent. We’ll be in touch soon.';
-    } catch (err) {
-      statusEl.className = 'status bad';
-      statusEl.textContent = 'Your enquiry didn’t send. Please try again, or email kallam@hcpvanta.com.';
-    } finally {
-      btn.disabled = false; btn.textContent = 'Send enquiry';
-    }
-  });
-</script>
+<noscript><style>ol.steps[data-moment] li::after { transform: none !important; } ol.steps[data-moment] li h3, ol.steps[data-moment] li p { opacity: 1 !important; } ol.steps[data-moment] li::before { color: var(--teal) !important; } .enter, .slot { opacity: 1 !important; animation: none !important; transform: none !important; }</style></noscript>
+<script src="site.js" defer></script>
 </body>
 </html>
