@@ -476,10 +476,17 @@
   @media (max-width: 560px) {
     .actions .btn, .contact-grid .side .btn, form.enquiry button, .founding .btn { width: 100%; text-align: center; justify-self: stretch; }
   }
+
+  /* ===== 3D layer ===== */
+  @media (min-width: 901px) { .visual { min-height: 34rem; align-content: end; } .visual .diary { margin-top: 0; width: 100%; } }
+  #scene3d { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; }
+  main, footer.site { position: relative; z-index: 1; }
+  section.band-soft { background: color-mix(in srgb, var(--soft) 78%, transparent); }
 </style>
 </head>
 <body>
 <a class="skip" href="#top">Skip to content</a>
+<canvas id="scene3d" aria-hidden="true"></canvas>
 
 <header class="site">
   <div class="wrap">
@@ -495,7 +502,7 @@
 </header>
 
 <main id="top">
-  <section class="hero">
+  <section class="hero" data-3d="hero">
     <div class="wrap">
       <div>
         <h1 class="enter e-lead">Helping healthcare businesses and suppliers grow.</h1>
@@ -507,20 +514,7 @@
       </div>
 
       <div class="visual">
-      <figure class="browser enter e-visual" aria-label="Example of a website and CRM set up for a healthcare business">
-        <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><div class="url">Your new website</div></div>
-        <div class="site-mock" aria-hidden="true">
-          <div class="sm-nav"><b></b><i></i><i></i><i></i></div>
-          <div class="sm-h"></div><div class="sm-h short"></div>
-          <div class="sm-p"></div>
-          <span class="sm-btn">Book a consultation</span>
-          <div class="sm-cards"><div></div><div></div><div></div></div>
-        </div>
-        <div class="crm-mock" aria-hidden="true">
-          <p class="crm-title">Enquiries this week</p>
-          <ul><li><span>New</span><b>6</b></li><li><span>Replied</span><b>4</b></li><li><span>Booked</span><b>3</b></li></ul>
-        </div>
-      </figure>
+      
       <figure class="diary" aria-label="Example of a week of booked meetings">
         <div class="diary-head">
           <strong>Your diary</strong>
@@ -564,7 +558,7 @@
     </div>
   </section>
 
-  <section class="block" id="services">
+  <section class="block" id="services" data-3d="right">
     <div class="wrap">
       <h2>Two services that work together.</h2>
       <p class="intro">Start with the setup you need to sell properly, then let us fill your diary. Take one or both.</p>
@@ -597,7 +591,7 @@
     </div>
   </section>
 
-  <section class="block band-soft" id="sectors">
+  <section class="block band-soft" id="sectors" data-3d="left">
     <div class="wrap">
       <h2>Built around every part of healthcare.</h2>
       <p class="intro">Each sector has its own buyers, language and pressures, so we work sector by sector rather than one size fits all. We work across the UK.</p>
@@ -611,7 +605,7 @@
     </div>
   </section>
 
-  <section class="block" id="how">
+  <section class="block" id="how" data-3d="dim">
     <div class="wrap">
       <h2>How meetings get booked</h2>
       <p class="intro">For suppliers, every campaign follows the same four steps, and nothing goes out without your approval.</p>
@@ -636,7 +630,7 @@
     </div>
   </section>
 
-  <section class="block" id="pricing">
+  <section class="block" id="pricing" data-3d="left">
     <div class="wrap split">
       <div>
         <h2>Clear pricing, with no surprises.</h2>
@@ -654,7 +648,7 @@
     </div>
   </section>
 
-  <section class="block" id="founding">
+  <section class="block" id="founding" data-3d="right">
     <div class="wrap">
       <div class="founding">
         <div>
@@ -668,7 +662,7 @@
     </div>
   </section>
 
-  <section class="block" id="about">
+  <section class="block" id="about" data-3d="right">
     <div class="wrap about">
       <div class="avatar" aria-hidden="true">KB</div>
       <div>
@@ -679,7 +673,7 @@
     </div>
   </section>
 
-  <section class="block band-soft" id="faq">
+  <section class="block band-soft" id="faq" data-3d="right">
     <div class="wrap">
       <h2>Questions people ask.</h2>
       <div class="faq-list">
@@ -693,7 +687,7 @@
     </div>
   </section>
 
-  <section class="block contact band-deep" id="contact">
+  <section class="block contact band-deep" id="contact" data-3d="hide">
     <div class="wrap contact-grid">
       <div class="side">
         <h2>Let’s see if it’s a fit.</h2>
@@ -714,7 +708,7 @@
     </div>
   </section>
 
-  <section class="block" id="privacy">
+  <section class="block" id="privacy" data-3d="hide">
     <div class="wrap">
       <details class="privacy">
         <summary>Privacy notice</summary>
@@ -790,6 +784,100 @@
     }, { rootMargin: '0px 0px -25% 0px', threshold: 0.4 });
     io.observe(steps);
   } else if (steps) { steps.classList.add('in-view'); }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script>
+(function () {
+  if (!window.THREE) return;
+  const canvas = document.getElementById('scene3d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small = matchMedia('(max-width: 900px)');
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' }); }
+  catch (e) { canvas.remove(); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+  camera.position.set(0, 0, 14);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x9fb8b3, 0.95));
+  const key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(4, 6, 8); scene.add(key);
+  const warm = new THREE.DirectionalLight(0xE9B949, 0.7); warm.position.set(-6, -3, 3); scene.add(warm);
+
+  // A soft, rounded medical cross
+  const a = 0.55, l = 1.6, sh = new THREE.Shape();
+  sh.moveTo(-a, l); sh.lineTo(a, l); sh.lineTo(a, a); sh.lineTo(l, a); sh.lineTo(l, -a); sh.lineTo(a, -a);
+  sh.lineTo(a, -l); sh.lineTo(-a, -l); sh.lineTo(-a, -a); sh.lineTo(-l, -a); sh.lineTo(-l, a); sh.lineTo(-a, a); sh.closePath();
+  const geo = new THREE.ExtrudeGeometry(sh, { depth: 0.7, bevelEnabled: true, bevelThickness: 0.28, bevelSize: 0.24, bevelSegments: 10, curveSegments: 10 });
+  geo.center();
+  const tealMat = new THREE.MeshPhysicalMaterial({ color: 0x2F6F6A, roughness: 0.25, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.12 });
+  const cross = new THREE.Mesh(geo, tealMat);
+
+  // An orbit with three "booked meetings"
+  const R = 2.9, tilt = Math.PI / 2.4;
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(R, 0.022, 12, 200), new THREE.MeshBasicMaterial({ color: 0x2F6F6A, transparent: true, opacity: 0.22 }));
+  ring.rotation.x = tilt;
+  const goldMat = new THREE.MeshPhysicalMaterial({ color: 0xE9B949, roughness: 0.3, clearcoat: 0.8 });
+  const dots = [0, 1, 2].map(() => new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), goldMat));
+
+  const group = new THREE.Group();
+  group.add(cross, ring, ...dots);
+  scene.add(group);
+
+  const dark = matchMedia('(prefers-color-scheme: dark)');
+  const lin = hex => new THREE.Color(hex).convertSRGBToLinear();
+  goldMat.color.copy(lin(0xE9B949));
+  const tint = () => { tealMat.color.copy(lin(dark.matches ? 0x5FA79E : 0x2F6F6A)); ring.material.color.copy(lin(dark.matches ? 0x6FB8AF : 0x2F6F6A)); };
+  tint(); dark.addEventListener && dark.addEventListener('change', tint);
+
+  const sections = [...document.querySelectorAll('[data-3d]')];
+  const view = () => { const h = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z; return { h, w: h * camera.aspect }; };
+  const resize = () => { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); };
+  resize(); addEventListener('resize', resize);
+
+  const target = { x: 0, y: 0, s: 1, o: 1 }, cur = { x: 0, y: 0, s: 1, o: 0 };
+  function aim() {
+    const mid = innerHeight * 0.5; let active = sections[0];
+    for (const sec of sections) if (sec.getBoundingClientRect().top <= mid) active = sec;
+    const mode = reduce ? (active.dataset['3d'] === 'hide' ? 'hide' : 'hero') : active.dataset['3d'];
+    const { w, h } = view();
+    if (small.matches) {
+      target.x = w * 0.22; target.y = h * 0.12; target.s = 0.62;
+      target.o = mode === 'hide' ? 0 : mode === 'hero' ? 0.55 : 0.16;
+      return;
+    }
+    const side = Math.min(w * 0.38, 7.4);
+    target.s = mode === 'hero' ? 0.82 : 0.85;
+    target.x = mode === 'left' ? -side : mode === 'hero' ? w * 0.25 : side;
+    target.y = mode === 'hero' ? h * 0.19 : 0;
+    target.o = mode === 'hide' ? 0 : mode === 'dim' ? 0.18 : 1;
+  }
+
+  let last = performance.now(), running = true;
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) { last = performance.now(); requestAnimationFrame(frame); } });
+  function frame(now) {
+    if (!running) return;
+    const dt = Math.min((now - last) / 1000, 0.05); last = now;
+    aim();
+    const k = 1 - Math.pow(0.02, dt);       // smooth, interruptible follow
+    for (const p of ['x', 'y', 's', 'o']) cur[p] += (target[p] - cur[p]) * k;
+    group.position.set(cur.x, cur.y, 0);
+    group.scale.setScalar(cur.s);
+    canvas.style.opacity = cur.o.toFixed(3);
+    const t = reduce ? 0 : now / 1000, sc = reduce ? 0 : scrollY * 0.0012;
+    cross.rotation.set(0.3 + Math.sin(t * 0.4) * 0.2 + sc * 0.35, 0.6 + t * 0.25 + sc, Math.sin(t * 0.3) * 0.08);
+    group.position.y += reduce ? 0 : Math.sin(t * 0.9) * 0.12;
+    dots.forEach((d, i) => {
+      const ang = t * 0.6 + i * 2.094 + sc * 1.5;
+      d.position.set(Math.cos(ang) * R, Math.sin(ang) * R * Math.cos(tilt), Math.sin(ang) * R * Math.sin(tilt));
+    });
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.min.js"></script>
 <script>
